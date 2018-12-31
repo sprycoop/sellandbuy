@@ -1972,6 +1972,7 @@ $allFilters = wc_get_attribute_taxonomies();
         jQuery("#showFilter").toggle();
     });
     function paginationData(page_no, category) {
+
 //        var url = document.location.href + "&page_no=" + page_no;
         //        document.location = url;         var category_name = '<?php echo $category_name; ?>';
         //window.history.pushState({}, document.title, "?category=" + category_name + "&page_no=" + page_no);
@@ -1988,6 +1989,9 @@ $allFilters = wc_get_attribute_taxonomies();
             url: "/wp-content/themes/dashstore-child/ajax_request.php",
             data: {"page_no": page_no, "category": category, "action": "pagination_data", "url": url},
             success: function (response) {
+                jQuery('html, body').animate({
+                    scrollTop: jQuery("body").offset().top
+                }, 2000);
                 jQuery(".loader").hide();
                 jQuery("#original_product").hide();
                 jQuery("#ajax_product_record").html(response);
@@ -2832,22 +2836,22 @@ $allFilters = wc_get_attribute_taxonomies();
     }
 
     function showFilterModal(attribute_name) {
-        
+
         var category = getUrlVars()["category"];
         var url = jQuery(location).attr("href");
         var capitalize_attribute_name = attribute_name.toLowerCase().replace(/\b[a-z]/g, function (letter) {
-        
-        jQuery("." + attribute_name + "_modal").modal("show");
+
+            jQuery("." + attribute_name + "_modal").modal("show");
             return letter.toUpperCase();
         });
-        
+
         jQuery.ajax({
             type: "POST",
             url: "/wp-content/themes/dashstore-child/ajax_request.php",
-            data: {"action": "show"+capitalize_attribute_name+"Modal", "category_name": category, "url": url},
+            data: {"action": "show" + capitalize_attribute_name + "Modal", "category_name": category, "url": url},
             success: function (response) {
 
-                jQuery("#ajax_show_"+attribute_name).html(response);
+                jQuery("#ajax_show_" + attribute_name).html(response);
             },
             error: function (response) {
                 jQuery("." + attribute_name + "_modal").modal("hide");
