@@ -14,9 +14,9 @@ get_header();
         height: 210px;
     }
     .loader {
-        position: absolute;
+        position: fixed;
         z-index: 999;
-        width: 67%;
+        width: 100%;
         margin: auto;
         text-align: center;
         top: 49%;
@@ -900,7 +900,7 @@ $allFilters = wc_get_attribute_taxonomies();
                                                             <span class="good" style="<?= $condition_class; ?>">Condition Not Available</span>
                                                         <?php } ?>
                                                         <?php ?>
-                                                        <p><?= number_format("$product->price", 2); ?>�</p>
+                                                            <p><?= number_format("$product->price", 2); ?>&euro;</p>
                                                     </div>
                                                     <!--/item-->                                    
 
@@ -1103,7 +1103,7 @@ $allFilters = wc_get_attribute_taxonomies();
         </div>
     </div>
 </div>
-<div class="modal fade mymodal seller_modal" id="squarespaceModal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade mymodal seller_modal pa_seller_resetModal" id="squarespaceModal2" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-right">
@@ -1115,7 +1115,7 @@ $allFilters = wc_get_attribute_taxonomies();
         </div>
     </div>
 </div>
-<div class="modal fade mymodal priceModal" id="squarespaceModal7" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade mymodal priceModal price_resetModal" id="squarespaceModal7" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-right">
@@ -1127,7 +1127,7 @@ $allFilters = wc_get_attribute_taxonomies();
         </div>
     </div>
 </div>
-<div class="modal fade mymodal brandModal brand_modal" id="squarespaceModal3" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade mymodal brandModal brand_modal brand_resetModal" id="squarespaceModal3" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-right">
@@ -1140,7 +1140,7 @@ $allFilters = wc_get_attribute_taxonomies();
         </div>
     </div>
 </div>
-<div class="modal fade mymodal yearModal years_modal" id="squarespaceModal4" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade mymodal yearModal years_modal pa_year_resetModal" id="squarespaceModal4" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-right">
@@ -1166,7 +1166,7 @@ $allFilters = wc_get_attribute_taxonomies();
         </div>
     </div>
 </div>
-<div class="modal fade mymodal conditionModal" id="squarespaceModal6" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade mymodal conditionModal pa_condition_resetModal" id="squarespaceModal6" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-right">
@@ -1179,7 +1179,7 @@ $allFilters = wc_get_attribute_taxonomies();
         </div>
     </div>
 </div>
-<div class="modal fade mymodal" id="sizeMessageModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade mymodal pa_size_resetModal" id="sizeMessageModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-right">
@@ -2189,6 +2189,89 @@ $allFilters = wc_get_attribute_taxonomies();
             }
         });
     }
+//    function fetchData(category, category_id, category_name) {
+//        var category_url = getUrlVars()["category"];
+//        var location = getUrlVars()["location"];
+//        jQuery(".sub_cat_boards").hide();
+//        jQuery("#" + category_url).removeClass('active_catalog');
+//        jQuery("#" + category_name).addClass('active_catalog');
+//        jQuery(".sub_child_cat_boards").hide();
+//        //jQuery(".loader").show();
+//        window.history.pushState({}, document.title, "?category=" + category_name);
+//        if (category_name == 'windsurf' || category_name == 'kitesurf' || category_name == 'stand-up-paddle' || category_name == 'surf' || category_name == 'surfwear' || category_name == 'action-camera') {
+//            jQuery(".categorySizeModal").hide();
+//            jQuery(".ajaxCategorySizeModal").hide();
+//            jQuery(".ajaxCategoryModal").show();
+//        } else {
+//            jQuery(".categorySizeModal").hide();
+//            jQuery(".ajaxCategorySizeModal").show();
+//            jQuery(".ajaxCategoryModal").hide();
+//        }
+//        if (category_id == 'windsurf_cat') {
+//            jQuery("#" + category_id).show();
+//            jQuery("#kitesurf_cat").hide();
+//            jQuery("#sup_cat").hide();
+//            jQuery("#surf_cat").hide();
+//            jQuery("#surfwear_cat").hide();
+//            jQuery("#camera_cat").hide();
+//        } else if (category_id == 'kitesurf_cat') {
+//            jQuery("#" + category_id).show();
+//            jQuery("#windsurf_cat").hide();
+//            jQuery("#sup_cat").hide();
+//            jQuery("#surf_cat").hide();
+//            jQuery("#surfwear_cat").hide();
+//            jQuery("#camera_cat").hide();
+//        } else if (category_id == 'sup_cat') {
+//            jQuery("#" + category_id).show();
+//            jQuery("#windsurf_cat").hide();
+//            jQuery("#kitesurf_cat").hide();
+//            jQuery("#surf_cat").hide();
+//            jQuery("#surfwear_cat").hide();
+//            jQuery("#camera_cat").hide();
+//        } else if (category_id == 'surf_cat') {
+//            jQuery("#" + category_id).show();
+//            jQuery("#windsurf_cat").hide();
+//            jQuery("#kitesurf_cat").hide();
+//            jQuery("#sup_cat").hide();
+//            jQuery("#surfwear_cat").hide();
+//            jQuery("#camera_cat").hide();
+//        } else if (category_id == 'surfwear_cat') { 
+//            jQuery("#" + category_id).show();
+//            jQuery("#windsurf_cat").hide();
+//            jQuery("#kitesurf_cat").hide();
+//            jQuery("#sup_cat").hide();
+//            jQuery("#surf_cat").hide();
+//            jQuery("#camera_cat").hide();
+//        } else {
+//            jQuery("#" + category_id).show();
+//            jQuery("#windsurf_cat").hide();
+//            jQuery("#kitesurf_cat").hide();
+//            jQuery("#sup_cat").hide();
+//            jQuery("#surf_cat").hide();
+//            jQuery("#surfwear_cat").hide();
+//        }
+//
+//
+////        jQuery.ajax({
+////            type: "POST",
+////            url: "/wp-content/themes/dashstore-child/ajax_request.php",
+////            data: {"category": category, "action": "fetchSubCategories"},
+////            success: function (result) {
+////                jQuery(".Boards").html(result);
+////            }
+//        //        });
+//        jQuery.ajax({
+//            type: "POST",
+//            url: "/wp-content/themes/dashstore-child/ajax_request.php",
+//            data: {"category": category, "action": "fetchCategories", "location": location},
+//            success: function (response) {
+//                jQuery(".product_count_class").hide();
+//                jQuery(".loader").hide();
+//                jQuery("#original_product").hide();
+//                jQuery("#ajax_product_record").html(response);
+//            }
+//        });
+//    }
     function fetchData(category, category_id, category_name) {
         var category_url = getUrlVars()["category"];
         var location = getUrlVars()["location"];
@@ -2235,7 +2318,7 @@ $allFilters = wc_get_attribute_taxonomies();
             jQuery("#sup_cat").hide();
             jQuery("#surfwear_cat").hide();
             jQuery("#camera_cat").hide();
-        } else if (category_id == 'surfwear_cat') {
+        } else if (category_id == 'surfwear_cat') { 
             jQuery("#" + category_id).show();
             jQuery("#windsurf_cat").hide();
             jQuery("#kitesurf_cat").hide();
@@ -2620,188 +2703,206 @@ $allFilters = wc_get_attribute_taxonomies();
         bootbox.alert("Please select any subcategories to view conditions filters");
     }
 
+//    function resetButton(modal_name, category_name) {
+//        if (modal_name == 'seller') {
+//            var url = window.location.href;
+//            clean_uri = url.split("&pa_seller")[0];
+//            window.history.replaceState({}, document.location, clean_uri);
+//            var new_url = window.location.href;
+//            jQuery("#squarespaceModal2").modal("hide");
+//            jQuery.ajax({
+//                type: "POST",
+//                url: "/wp-content/themes/dashstore-child/ajax_request.php",
+//                data: {"action": "reset", "category_name": category_name, "url": new_url},
+//                success: function (response) {
+//                    jQuery(".loader").hide();
+//                    jQuery("#original_product").hide();
+//                    jQuery("#ajax_product_record").html(response);
+//                }
+//            });
+//        }
+//
+//        if (modal_name == 'brand') {
+//            var years_param = getUrlVars()['pa_year'];
+//            if (years_param) {
+//                var year = [];
+//                var year_name = [];
+//                jQuery.each(jQuery("input[name='selected_years[]']:checked"), function () {
+//                    year.push(jQuery(this).val());
+//                });
+//                jQuery.each(jQuery("input[name='selected_years[]']:checked"), function () {
+//                    year_name.push(jQuery(this).attr('data-year'));
+//                });
+//
+//                var checked_value_name = year_name.join(',');
+//
+//                var url = jQuery(location).attr("href");
+//                clean_uri = url.split("&brand")['0'];
+//                window.history.replaceState({}, document.location, clean_uri + "&pa_year=" + checked_value_name);
+//            }
+//
+//            var seler_param = getUrlVars()['pa_seller'];
+//            if (seler_param) {
+//                var seller = [];
+//                var seller_name = [];
+//                jQuery.each(jQuery("input[name='seller[]']:checked"), function () {
+//                    seller.push(jQuery(this).val());
+//                });
+//                jQuery.each(jQuery("input[name='seller[]']:checked"), function () {
+//                    seller_name.push(jQuery(this).attr('data-seller'));
+//                });
+//
+//                var checked_value_name = seller_name.join(',');
+//                var url = jQuery(location).attr("href");
+//                clean_uri = url.split("&brand")['0'];
+//                window.history.replaceState({}, document.location, clean_uri + "&pa_seller=" + checked_value_name);
+//            }
+//
+//            var price_params = getUrlVars()['price'];
+//            if (price_params) {
+//                var amount = jQuery("input[name=apply_price_range]").val();
+//                var url = jQuery(location).attr("href");
+//                clean_uri = url.split("&brand")['0'];
+//                window.history.replaceState({}, document.location, clean_uri + "&price=" + amount);
+//
+//            }
+//
+////       var size_params = getUrlVars()['pa_size'];
+////       
+////        if('size_params'){
+////           
+////         var checked_name = jQuery("input[name=" + attribute_key + "]:checked").attr('data-size-name');
+////        var checked_value = jQuery("input[name=" + attribute_key + "]:checked").attr('data-size');
+////        
+////        var url = jQuery(location).attr("href");
+////            clean_uri = url.split("&brand")['0'];
+////           window.history.replaceState({}, document.location, clean_uri + "&checked_name=" + checked_name);
+////        
+////       }
+//
+//            var condition_params = getUrlVars()['pa_condition'];
+//            if (condition_params) {
+//                var condition = [];
+//                var params = getUrlVars()['pa_condition'];
+//                var checked_name = jQuery("input[name=" + attribute_key + "]:checked").attr('data-condition-name');
+//                var checked_value = jQuery("input[name=" + attribute_key + "]:checked").attr('data-condition');
+//
+//                var url = jQuery(location).attr("href");
+//                clean_uri = url.split("&brand")['0'];
+//                window.history.replaceState({}, document.location, clean_uri + "&" + pa_condition + "=" + checked_value);
+//                // window.history.replaceState({}, document.location, clean_uri + "&pa_condition=" + checked_value);
+//
+//            } else {
+//
+//                var url = jQuery(location).attr("href");
+//                clean_uri = url.split("&brand")['0'];
+//                window.history.replaceState({}, document.location, clean_uri);
+//
+//                var new_url = window.location.href;
+//                jQuery(".brandModal").modal("hide");
+//                jQuery.ajax({
+//                    type: "POST",
+//                    url: "/wp-content/themes/dashstore-child/ajax_request.php",
+//                    data: {"action": "reset", "category_name": category_name, "url": new_url},
+//                    success: function (response) {
+//                        jQuery(".loader").hide();
+//                        jQuery("#original_product").hide();
+//                        jQuery("#ajax_product_record").html(response);
+//                    }
+//                });
+//            }
+//        }
+//
+//        if (modal_name == 'pa_year') {
+//
+//            var url = window.location.href;
+//            clean_uri = url.split("&pa_year")[0];
+//            window.history.replaceState({}, document.location, clean_uri);
+//            var new_url = window.location.href;
+//            jQuery(".yearModal").modal("hide");
+//            jQuery.ajax({
+//                type: "POST",
+//                url: "/wp-content/themes/dashstore-child/ajax_request.php",
+//                data: {"action": "reset", "category_name": category_name, "url": new_url},
+//                success: function (response) {
+//                    jQuery(".loader").hide();
+//                    jQuery("#original_product").hide();
+//                    jQuery("#ajax_product_record").html(response);
+//                }
+//            });
+//        }
+//
+//        if (modal_name == 'price') {
+//
+//            var url = window.location.href;
+//            clean_uri = url.split("&price")[0];
+//            window.history.replaceState({}, document.location, clean_uri);
+//            var new_url = window.location.href;
+//            jQuery(".priceModal").modal("hide");
+//            jQuery.ajax({
+//                type: "POST",
+//                url: "/wp-content/themes/dashstore-child/ajax_request.php",
+//                data: {"action": "reset", "category_name": category_name, "url": new_url},
+//                success: function (response) {
+//                    jQuery(".loader").hide();
+//                    jQuery("#original_product").hide();
+//                    jQuery("#ajax_product_record").html(response);
+//                }
+//            });
+//        }
+//
+//        if (modal_name == 'pa_size') {
+//            var url = window.location.href;
+//            clean_uri = url.split("&pa_size")[0];
+//            window.history.replaceState({}, document.location, clean_uri);
+//            var new_url = window.location.href;
+//            jQuery("#squarespaceModal5").modal("hide");
+//            jQuery.ajax({
+//                type: "POST",
+//                url: "/wp-content/themes/dashstore-child/ajax_request.php",
+//                data: {"action": "reset", "category_name": category_name, "url": new_url},
+//                success: function (response) {
+//                    jQuery(".loader").hide();
+//                    jQuery("#original_product").hide();
+//                    jQuery("#ajax_product_record").html(response);
+//                }
+//            });
+//        }
+//        if (modal_name == 'pa_condition') {
+//            var url = window.location.href;
+//            clean_uri = url.split("&pa_condition")[0];
+//            window.history.replaceState({}, document.location, clean_uri);
+//            var new_url = window.location.href;
+//            jQuery("#squarespaceModal6").modal("hide");
+//            jQuery.ajax({
+//                type: "POST",
+//                url: "/wp-content/themes/dashstore-child/ajax_request.php",
+//                data: {"action": "reset", "category_name": category_name, "url": new_url},
+//                success: function (response) {
+//                    jQuery(".loader").hide();
+//                    jQuery("#original_product").hide();
+//                    jQuery("#ajax_product_record").html(response);
+//                }
+//            });
+//        }
+//    }
     function resetButton(modal_name, category_name) {
-        if (modal_name == 'seller') {
-            var url = window.location.href;
-            clean_uri = url.split("&pa_seller")[0];
-            window.history.replaceState({}, document.location, clean_uri);
-            var new_url = window.location.href;
-            jQuery("#squarespaceModal2").modal("hide");
-            jQuery.ajax({
-                type: "POST",
-                url: "/wp-content/themes/dashstore-child/ajax_request.php",
-                data: {"action": "reset", "category_name": category_name, "url": new_url},
-                success: function (response) {
-                    jQuery(".loader").hide();
-                    jQuery("#original_product").hide();
-                    jQuery("#ajax_product_record").html(response);
-                }
-            });
-        }
-
-        if (modal_name == 'brand') {
-            var years_param = getUrlVars()['pa_year'];
-            if (years_param) {
-                var year = [];
-                var year_name = [];
-                jQuery.each(jQuery("input[name='selected_years[]']:checked"), function () {
-                    year.push(jQuery(this).val());
-                });
-                jQuery.each(jQuery("input[name='selected_years[]']:checked"), function () {
-                    year_name.push(jQuery(this).attr('data-year'));
-                });
-
-                var checked_value_name = year_name.join(',');
-
-                var url = jQuery(location).attr("href");
-                clean_uri = url.split("&brand")['0'];
-                window.history.replaceState({}, document.location, clean_uri + "&pa_year=" + checked_value_name);
+        var url = window.location.href;
+        clean_uri = url.split("&" + modal_name)[0];
+        window.history.replaceState({}, document.location, clean_uri);
+        var new_url = window.location.href;
+        jQuery("." + modal_name + "_resetModal").modal("hide");
+        jQuery.ajax({
+            type: "POST",
+            url: "/wp-content/themes/dashstore-child/ajax_request.php",
+            data: {"action": "reset", "category_name": category_name, "url": new_url},
+            success: function (response) {
+                jQuery(".loader").hide();
+                jQuery("#original_product").hide();
+                jQuery("#ajax_product_record").html(response);
             }
+        });
 
-            var seler_param = getUrlVars()['pa_seller'];
-            if (seler_param) {
-                var seller = [];
-                var seller_name = [];
-                jQuery.each(jQuery("input[name='seller[]']:checked"), function () {
-                    seller.push(jQuery(this).val());
-                });
-                jQuery.each(jQuery("input[name='seller[]']:checked"), function () {
-                    seller_name.push(jQuery(this).attr('data-seller'));
-                });
-
-                var checked_value_name = seller_name.join(',');
-                var url = jQuery(location).attr("href");
-                clean_uri = url.split("&brand")['0'];
-                window.history.replaceState({}, document.location, clean_uri + "&pa_seller=" + checked_value_name);
-            }
-
-            var price_params = getUrlVars()['price'];
-            if (price_params) {
-                var amount = jQuery("input[name=apply_price_range]").val();
-                var url = jQuery(location).attr("href");
-                clean_uri = url.split("&brand")['0'];
-                window.history.replaceState({}, document.location, clean_uri + "&price=" + amount);
-
-            }
-
-//       var size_params = getUrlVars()['pa_size'];
-//       
-//        if('size_params'){
-//           
-//         var checked_name = jQuery("input[name=" + attribute_key + "]:checked").attr('data-size-name');
-//        var checked_value = jQuery("input[name=" + attribute_key + "]:checked").attr('data-size');
-//        
-//        var url = jQuery(location).attr("href");
-//            clean_uri = url.split("&brand")['0'];
-//           window.history.replaceState({}, document.location, clean_uri + "&checked_name=" + checked_name);
-//        
-//       }
-
-            var condition_params = getUrlVars()['pa_condition'];
-            if (condition_params) {
-                var condition = [];
-                var params = getUrlVars()['pa_condition'];
-                var checked_name = jQuery("input[name=" + attribute_key + "]:checked").attr('data-condition-name');
-                var checked_value = jQuery("input[name=" + attribute_key + "]:checked").attr('data-condition');
-
-                var url = jQuery(location).attr("href");
-                clean_uri = url.split("&brand")['0'];
-                window.history.replaceState({}, document.location, clean_uri + "&" + pa_condition + "=" + checked_value);
-                // window.history.replaceState({}, document.location, clean_uri + "&pa_condition=" + checked_value);
-
-            } else {
-
-                var url = jQuery(location).attr("href");
-                clean_uri = url.split("&brand")['0'];
-                window.history.replaceState({}, document.location, clean_uri);
-
-                var new_url = window.location.href;
-                jQuery(".brandModal").modal("hide");
-                jQuery.ajax({
-                    type: "POST",
-                    url: "/wp-content/themes/dashstore-child/ajax_request.php",
-                    data: {"action": "reset", "category_name": category_name, "url": new_url},
-                    success: function (response) {
-                        jQuery(".loader").hide();
-                        jQuery("#original_product").hide();
-                        jQuery("#ajax_product_record").html(response);
-                    }
-                });
-            }
-        }
-
-        if (modal_name == 'pa_year') {
-
-            var url = window.location.href;
-            clean_uri = url.split("&pa_year")[0];
-            window.history.replaceState({}, document.location, clean_uri);
-            var new_url = window.location.href;
-            jQuery(".yearModal").modal("hide");
-            jQuery.ajax({
-                type: "POST",
-                url: "/wp-content/themes/dashstore-child/ajax_request.php",
-                data: {"action": "reset", "category_name": category_name, "url": new_url},
-                success: function (response) {
-                    jQuery(".loader").hide();
-                    jQuery("#original_product").hide();
-                    jQuery("#ajax_product_record").html(response);
-                }
-            });
-        }
-
-        if (modal_name == 'price') {
-
-            var url = window.location.href;
-            clean_uri = url.split("&price")[0];
-            window.history.replaceState({}, document.location, clean_uri);
-            var new_url = window.location.href;
-            jQuery(".priceModal").modal("hide");
-            jQuery.ajax({
-                type: "POST",
-                url: "/wp-content/themes/dashstore-child/ajax_request.php",
-                data: {"action": "reset", "category_name": category_name, "url": new_url},
-                success: function (response) {
-                    jQuery(".loader").hide();
-                    jQuery("#original_product").hide();
-                    jQuery("#ajax_product_record").html(response);
-                }
-            });
-        }
-
-        if (modal_name == 'pa_size') {
-            var url = window.location.href;
-            clean_uri = url.split("&pa_size")[0];
-            window.history.replaceState({}, document.location, clean_uri);
-            var new_url = window.location.href;
-            jQuery("#squarespaceModal5").modal("hide");
-            jQuery.ajax({
-                type: "POST",
-                url: "/wp-content/themes/dashstore-child/ajax_request.php",
-                data: {"action": "reset", "category_name": category_name, "url": new_url},
-                success: function (response) {
-                    jQuery(".loader").hide();
-                    jQuery("#original_product").hide();
-                    jQuery("#ajax_product_record").html(response);
-                }
-            });
-        }
-        if (modal_name == 'pa_condition') {
-            var url = window.location.href;
-            clean_uri = url.split("&pa_condition")[0];
-            window.history.replaceState({}, document.location, clean_uri);
-            var new_url = window.location.href;
-            jQuery("#squarespaceModal6").modal("hide");
-            jQuery.ajax({
-                type: "POST",
-                url: "/wp-content/themes/dashstore-child/ajax_request.php",
-                data: {"action": "reset", "category_name": category_name, "url": new_url},
-                success: function (response) {
-                    jQuery(".loader").hide();
-                    jQuery("#original_product").hide();
-                    jQuery("#ajax_product_record").html(response);
-                }
-            });
-        }
     }
 
     function applySizeButton() {
